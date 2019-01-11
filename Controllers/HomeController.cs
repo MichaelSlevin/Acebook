@@ -25,8 +25,6 @@ namespace TodoApi.Controllers
         public ActionResult<IEnumerable<string>> Index()
         {
             var todoitems = _context.TodoItems.ToList();
-            //TodoItem item = new TodoItem();
-            //item.Name = todoitems[0].Name;
 
             TodoList todoList = new TodoList();
 
@@ -45,38 +43,48 @@ namespace TodoApi.Controllers
             return View(todoList);
 
         }
+        [HttpPost]
+        public void Add(string name)
+        {
+            Console.WriteLine("post check");
+            _context.TodoItems.Add(new TodoItem {Name = name, IsComplete = false});
+            _context.SaveChanges();
+        }
 
 
-    //// GET api/values/5
-    //[HttpGet("{id}")]
-    //public ActionResult<string> Get(int id)
-    //{
-    //    Console.WriteLine(id);
-    //    return id.ToString();
-    //}
 
-    //// POST api/values
-    //[HttpPost]
-    //public void Post()
 
-    ////public void Post([FromBody] string value)
-    //{
-    //    Console.WriteLine("Hello");
-    //    //return new string[] { "Test string", "value2" };
-    //}
 
-    //// PUT api/values/5
-    //[HttpPut("{id}")]
-    //public void Put(int id, [FromBody] string value)
-    //{
+        //// GET api/values/5
+        //[HttpGet("{id}")]
+        //public ActionResult<string> Get(int id)
+        //{
+        //    Console.WriteLine(id);
+        //    return id.ToString();
+        //}
 
-    //}
+        //// POST api/values
+        //[HttpPost]
+        //public void Post()
 
-    //// DELETE api/values/5
-    //[HttpDelete("{id}")]
-    //public void Delete(int id)
-    //{
+        ////public void Post([FromBody] string value)
+        //{
+        //    Console.WriteLine("Hello");
+        //    //return new string[] { "Test string", "value2" };
+        //}
 
-    //}
-}
+        //// PUT api/values/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+
+        //}
+
+        //// DELETE api/values/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+
+        //}
+    }
 }
