@@ -1,0 +1,15 @@
+﻿@model TodoApi.Models.TodoList
+
+<h1> 
+    @foreach (var item in @Model.GetItems())
+    {
+        @item.Name;
+        <br />
+    }
+    
+</h1>
+
+
+
+
+

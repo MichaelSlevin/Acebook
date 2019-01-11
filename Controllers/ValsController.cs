@@ -5,20 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TodoApi.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValsController : ControllerBase
     {
-        // GET api/values
+        // GET api/vals
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
-
+            return new string[] { "New value for vals route", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/vals/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
@@ -26,14 +25,12 @@ namespace TodoApi.Controllers
             return id.ToString();
         }
 
-        // POST api/values
+        // POST api/vals//public void Post([FromBody] string value)
         [HttpPost]
-        public string[] Post()
-
-        //public void Post([FromBody] string value)
+        public void Post()
         {
-            //Console.WriteLine("Hello");
-            return new string[] { "Test string", "value2" };
+            Console.WriteLine("Hello, this is a post request");
+            //return new string[] { "Test string", "value2" };
         }
 
         // PUT api/values/5
