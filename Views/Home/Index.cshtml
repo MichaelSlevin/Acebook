@@ -1,15 +1,16 @@
 ﻿@model TodoApi.Models.TodoList
 
-<h1> 
+<h1>To do items</h1>
     @foreach (var item in @Model.GetItems())
     {
         @item.Name;
+
         <br />
+
     }
-    
-</h1>
 
 
-
-
-
+<form method="post" action="/">
+  To do item: <input type="text" name="name" />
+  <input type="submit" value="submit">
+</form>

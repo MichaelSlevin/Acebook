@@ -6,7 +6,8 @@ namespace TodoApi.Models
         public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
         }
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set;  }
+        public DbSet<Post> Posts { get; set; }
 
         // protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         // {

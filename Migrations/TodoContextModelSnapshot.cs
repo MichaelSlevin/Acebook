@@ -31,6 +31,20 @@ namespace TodoApi.Migrations
 
                     b.ToTable("TodoItems");
                 });
+            modelBuilder.Entity("TodoApi.Models.Post", b =>
+            {
+                b.Property<long>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<long>("UserId");
+
+                b.Property<string>("Content");
+                b.Property<System.DateTime>("CreatedOn");
+
+                b.HasKey("Id");
+
+                b.ToTable("Posts");
+            });
 #pragma warning restore 612, 618
         }
     }

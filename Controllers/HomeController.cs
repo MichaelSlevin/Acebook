@@ -14,7 +14,7 @@ namespace TodoApi.Controllers
     //[ApiController]
     public class HomeController : Controller
     {
-        readonly TodoContext _context; 
+        readonly TodoContext _context;
 
         public HomeController(TodoContext context)
         {
@@ -25,7 +25,7 @@ namespace TodoApi.Controllers
         public ActionResult<IEnumerable<string>> Index()
         {
             var todoitems = _context.TodoItems.ToList();
-
+            Console.WriteLine("In the home controller");
             TodoList todoList = new TodoList();
 
             foreach (var item1 in todoitems)
@@ -44,12 +44,24 @@ namespace TodoApi.Controllers
 
         }
         [HttpPost]
-        public void Add(string name)
+        public ActionResult Add(string name)
         {
-            Console.WriteLine("post check");
-            _context.TodoItems.Add(new TodoItem {Name = name, IsComplete = false});
+            Console.WriteLine(name);
+            Console.WriteLine("The form is triggering the post");
+            _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
             _context.SaveChanges();
+            return Redirect("/");
+            // Console.WriteLine("still inside the post controller");
         }
+
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(long id)
+        //{
+        //  Console.WriteLine("Delete has been called");
+        //  _context.TodoItems.Delete(id);
+        //  _context.SaveChanges();
+        //  return Redirect("/");
+        //}
 
 
 

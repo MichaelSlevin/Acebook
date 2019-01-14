@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System;
+
 namespace TodoApi.Models
 {
     public class TodoItem
@@ -25,6 +27,15 @@ namespace TodoApi.Models
         {
             TodoItemArray.Add(item);
         }
+
+    }
+
+    public class Post
+    {
+        public long Id { get; set; }
+        public long UserId { get; set; }
+        public string Content { get; set; }
+        public System.DateTime CreatedOn { get; set; }
     }
 
 }
