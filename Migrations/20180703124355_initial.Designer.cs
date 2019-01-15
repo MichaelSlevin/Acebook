@@ -20,19 +20,19 @@ namespace TodoApi.Migrations
                 .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("TodoApi.Models.TodoItem", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
+            //modelBuilder.Entity("TodoApi.Models.TodoItem", b =>
+                //{
+                //    b.Property<long>("Id")
+                //        .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("IsComplete");
+                //    b.Property<bool>("IsComplete");
 
-                    b.Property<string>("Name");
+                //    b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                //    b.HasKey("Id");
 
-                    b.ToTable("TodoItems");
-                });
+                //    b.ToTable("TodoItems");
+                //});
             modelBuilder.Entity("TodoApi.Models.Post", b =>
             {
                 b.Property<long>("Id")
@@ -46,6 +46,20 @@ namespace TodoApi.Migrations
                 b.HasKey("Id");
 
                 b.ToTable("Posts");
+            });
+            modelBuilder.Entity("TodoApi.Models.User", b =>
+            {
+                b.Property<long>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<string>("Username");
+
+                b.Property<string>("Email");
+                b.Property<string>("Password");
+
+                b.HasKey("Id");
+
+                b.ToTable("Users");
             });
 #pragma warning restore 612, 618
         }

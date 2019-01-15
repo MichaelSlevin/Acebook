@@ -32,10 +32,19 @@ namespace TodoApi.Models
 
     public class Post
     {
+
         public long Id { get; set; }
         public long UserId { get; set; }
         public string Content { get; set; }
         public System.DateTime CreatedOn { get; set; }
+        
+    }
+    public class User
+    {
+        public long Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 
 }
