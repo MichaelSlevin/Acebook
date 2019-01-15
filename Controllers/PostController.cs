@@ -47,23 +47,23 @@ namespace TodoApi.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<Post>> Add() //Add(Post post)
+        public async Task<ActionResult<Post>> Add(Post post)
         {
-            long long1 = 1;
-            Post post1 = new Post { Content = "hello", UserId = long1};
+            //long long1 = 1;
+            //Post post1 = new Post { Content = "hello", UserId = long1};
 
-            Console.WriteLine(post1);
-            Console.WriteLine(post1.Content);
-            Console.WriteLine(post1.UserId);
-            Console.WriteLine(post1.Id);
-            Console.WriteLine(post1.CreatedOn);
+            //Console.WriteLine(post);
+            //Console.WriteLine(post.Content);
+            //Console.WriteLine(post.UserId);
+            //Console.WriteLine(post.Id);
+            //Console.WriteLine(post.CreatedOn);
 
-            _context.Posts.Add(post1);
+            _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine(post1.Id);
+            Console.WriteLine(post.Id);
 
-            return CreatedAtAction("GetPostByUser", new { id =post1.UserId}, post1);
+            return CreatedAtAction("GetPostByUser", new { id =post.UserId}, post);
             //return Redirect("/");
         }
 

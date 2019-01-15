@@ -42,7 +42,7 @@ namespace TodoApi.Migrations
                     .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                 UserId = table.Column<long>(nullable: false),
                 Content = table.Column<string>(nullable: false),
-                CreatedOn = table.Column<System.DateTime>(nullable: false, defaultValue: System.DateTime.UtcNow)
+                CreatedOn = table.Column<System.DateTime>(nullable: true, defaultValue: System.DateTime.UtcNow)
             },
             constraints: table =>
             {
