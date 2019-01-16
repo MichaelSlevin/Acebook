@@ -63,8 +63,7 @@ namespace TodoApi.Controllers
            
             _context.Posts.Add(new Post { UserId = userid, Content = content });
             _context.SaveChanges();
-
-
+           
             return Redirect("/" + username);
         }
 
