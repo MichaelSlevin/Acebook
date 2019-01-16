@@ -12,6 +12,8 @@ namespace TodoApi.Models
     //}
     public class Encrypt
     {
+      //Following resource used for encryption
+      //https://www.codingame.com/playgrounds/11117/simple-encryption-using-c-and-xor-technique
       public string EncryptDecrypt(string szPlainText, int szEncryptionKey)
        {
          StringBuilder szInputStringBuild = new StringBuilder(szPlainText);
