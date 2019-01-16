@@ -53,16 +53,18 @@ namespace TodoApi.Controllers
 
         }
         [HttpPost]
-        public ActionResult Add(string content, string username)
+        public ActionResult Add(string content, int userid)
         {
-            Console.WriteLine($"username is {username}");
+            //Console.WriteLine($"username is {username}");
+
             Console.WriteLine("The form is triggering the post");
-            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
+            //long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
             Console.WriteLine($"userid is {userid}");
            
             _context.Posts.Add(new Post { UserId = userid, Content = content });
             _context.SaveChanges();
-
+            string username = _context.Users.Where(x => x.Id == userid).Select(x => x.Username).First();
+            Console.WriteLine($"username is {username}");
             return Redirect("/" + username);
         }
         //        [HttpPost]
