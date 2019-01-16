@@ -34,8 +34,7 @@ namespace TodoApi.Controllers
 
             foreach (var post in UPosts)
             {
-                profile.AddPost(new Post { Id = post.Id, UserId = post.UserId, Content = post.Content, CreatedOn = post.CreatedOn
-                });
+                profile.AddPost(new Post { Id = post.Id, UserId = post.UserId, Content = post.Content, CreatedOn = post.CreatedOn});
 
                 Console.WriteLine(post.Content);
 
@@ -47,16 +46,35 @@ namespace TodoApi.Controllers
             return View(profile);
 
         }
-//        [HttpPost]
-//        public ActionResult Add(string name)
-//        {
-//            Console.WriteLine(name);
-//            Console.WriteLine("The form is triggering the post");
-//            _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
-//            _context.SaveChanges();
-//            return Redirect("/");
-//            // Console.WriteLine("still inside the post controller");
-//        }
+        [Route("register")]
+        [HttpGet]
+        public ActionResult Register()
+        {
+          Console.WriteLine("I made it into the register route!!!!!!!");
+          return View();
+        }
+        [HttpPost]
+        public ActionResult Add(string username, string email, string password)
+        {
+            Console.WriteLine($"Username is {username}");
+            Console.WriteLine($"Email is {email}");
+            Console.WriteLine($"Password is {password}");
+            Console.WriteLine("The form is triggering the post");
+            _context.Users.Add(new User { Username = username, Email = email, Password = password });
+            _context.SaveChanges();
+            return Redirect($"/{username}");
+            // Console.WriteLine("still inside the post controller");
+        }
+       // [HttpPost]
+       // public ActionResult Add(string name)
+       // {
+       //     Console.WriteLine(name);
+       //     Console.WriteLine("The form is triggering the post");
+       //     _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
+       //     _context.SaveChanges();
+       //     return Redirect("/");
+       //     // Console.WriteLine("still inside the post controller");
+       // }
 
 //        //[HttpDelete("{id}")]
 //        //public ActionResult Delete(long id)
