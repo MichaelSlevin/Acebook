@@ -18,7 +18,7 @@ namespace TodoApi.Controllers
 
         public HomeController(TodoContext context)
         {
-             _context = context;
+            _context = context;
         }
         // GET api/values
         [HttpGet("{username}")]
@@ -34,7 +34,12 @@ namespace TodoApi.Controllers
 
             foreach (var post in UPosts)
             {
-                profile.AddPost(new Post { Id = post.Id, UserId = post.UserId, Content = post.Content, CreatedOn = post.CreatedOn
+                profile.AddPost(new Post
+                {
+                    Id = post.Id,
+                    UserId = post.UserId,
+                    Content = post.Content,
+                    CreatedOn = post.CreatedOn
                 });
 
                 Console.WriteLine(post.Content);
@@ -47,60 +52,73 @@ namespace TodoApi.Controllers
             return View(profile);
 
         }
-//        [HttpPost]
-//        public ActionResult Add(string name)
-//        {
-//            Console.WriteLine(name);
-//            Console.WriteLine("The form is triggering the post");
-//            _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
-//            _context.SaveChanges();
-//            return Redirect("/");
-//            // Console.WriteLine("still inside the post controller");
-//        }
+        [HttpPost]
+        public ActionResult Add(string content, string username)
+        {
+            Console.WriteLine($"username is {username}");
+            Console.WriteLine("The form is triggering the post");
+            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
+            Console.WriteLine($"userid is {userid}");
+           
+            _context.Posts.Add(new Post { UserId = userid, Content = content });
+            _context.SaveChanges();
 
-//        //[HttpDelete("{id}")]
-//        //public ActionResult Delete(long id)
-//        //{
-//        //  Console.WriteLine("Delete has been called");
-//        //  _context.TodoItems.Delete(id);
-//        //  _context.SaveChanges();
-//        //  return Redirect("/");
-//        //}
+            return Redirect("/" + username);
+        }
+        //        [HttpPost]
+        //        public ActionResult Add(string name)
+        //        {
+        //            Console.WriteLine(name);
+        //            Console.WriteLine("The form is triggering the post");
+        //            _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
+        //            _context.SaveChanges();
+        //            return Redirect("/");
+        //            // Console.WriteLine("still inside the post controller");
+        //        }
+
+        //        //[HttpDelete("{id}")]
+        //        //public ActionResult Delete(long id)
+        //        //{
+        //        //  Console.WriteLine("Delete has been called");
+        //        //  _context.TodoItems.Delete(id);
+        //        //  _context.SaveChanges();
+        //        //  return Redirect("/");
+        //        //}
 
 
 
 
 
-//        // GET api/values/5
-//        [HttpGet("{id}")]
-//        public ActionResult<string> Get(int id)
-//        {
-//            Console.WriteLine(id);
-//            return id.ToString();
-//        }
+        //        // GET api/values/5
+        //        [HttpGet("{id}")]
+        //        public ActionResult<string> Get(int id)
+        //        {
+        //            Console.WriteLine(id);
+        //            return id.ToString();
+        //        }
 
-//        // POST api/values
-//        [HttpPost]
-//        public void Post()
+        //        // POST api/values
+        //        [HttpPost]
+        //        public void Post()
 
-//        //public void Post([FromBody] string value)
-//        {
-//            Console.WriteLine("Hello");
-//            //return new string[] { "Test string", "value2" };
-//        }
+        //        //public void Post([FromBody] string value)
+        //        {
+        //            Console.WriteLine("Hello");
+        //            //return new string[] { "Test string", "value2" };
+        //        }
 
-//        // PUT api/values/5
-//        [HttpPut("{id}")]
-//        public void Put(int id, [FromBody] string value)
-//        {
+        //        // PUT api/values/5
+        //        [HttpPut("{id}")]
+        //        public void Put(int id, [FromBody] string value)
+        //        {
 
-//        }
+        //        }
 
-//        // DELETE api/values/5
-//        [HttpDelete("{id}")]
-//        public void Delete(int id)
-//        {
+        //        // DELETE api/values/5
+        //        [HttpDelete("{id}")]
+        //        public void Delete(int id)
+        //        {
 
-//        }
+        //        }
     }
 }
