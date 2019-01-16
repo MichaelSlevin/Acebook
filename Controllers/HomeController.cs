@@ -55,28 +55,16 @@ namespace TodoApi.Controllers
         [HttpPost]
         public ActionResult Add(string content, int userid)
         {
-            //Console.WriteLine($"username is {username}");
-
             Console.WriteLine("The form is triggering the post");
-            //long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
+
             Console.WriteLine($"userid is {userid}");
            
             _context.Posts.Add(new Post { UserId = userid, Content = content });
             _context.SaveChanges();
             string username = _context.Users.Where(x => x.Id == userid).Select(x => x.Username).First();
-            Console.WriteLine($"username is {username}");
+            Console.WriteLine($"username found in Users database is {username}");
             return Redirect("/" + username);
         }
-        //        [HttpPost]
-        //        public ActionResult Add(string name)
-        //        {
-        //            Console.WriteLine(name);
-        //            Console.WriteLine("The form is triggering the post");
-        //            _context.TodoItems.Add(new TodoItem { Name = name, IsComplete = false });
-        //            _context.SaveChanges();
-        //            return Redirect("/");
-        //            // Console.WriteLine("still inside the post controller");
-        //        }
 
         //        //[HttpDelete("{id}")]
         //        //public ActionResult Delete(long id)
@@ -86,9 +74,6 @@ namespace TodoApi.Controllers
         //        //  _context.SaveChanges();
         //        //  return Redirect("/");
         //        //}
-
-
-
 
 
         //        // GET api/values/5
