@@ -25,6 +25,7 @@ namespace TodoApi.Controllers
         public ActionResult<IEnumerable<string>> Index(string username)
         {
             var posts = _context.Posts.ToList();
+
             long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
             Console.WriteLine($"userid is {userid}");
             IEnumerable<Post> UPosts = posts.Where(post => post.UserId == userid);
@@ -53,16 +54,17 @@ namespace TodoApi.Controllers
 
         }
         [HttpPost]
-        public ActionResult Add(string content, int userid)
+        public ActionResult Add(string content, string username)
         {
             Console.WriteLine("The form is triggering the post");
-
+            Console.WriteLine($"username is {username}");
+            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
             Console.WriteLine($"userid is {userid}");
            
             _context.Posts.Add(new Post { UserId = userid, Content = content });
             _context.SaveChanges();
-            string username = _context.Users.Where(x => x.Id == userid).Select(x => x.Username).First();
-            Console.WriteLine($"username found in Users database is {username}");
+
+
             return Redirect("/" + username);
         }
 
