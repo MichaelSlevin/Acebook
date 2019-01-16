@@ -60,7 +60,12 @@ namespace TodoApi.Controllers
             Console.WriteLine($"Email is {email}");
             Console.WriteLine($"Password is {password}");
             Console.WriteLine("The form is triggering the post");
-            _context.Users.Add(new User { Username = username, Email = email, Password = password });
+            Encrypt encrypt = new Encrypt();
+            string encryptedPW = encrypt.EncryptDecrypt(password, 200);
+            Console.WriteLine($"Encrypted password is {encryptedPW}");
+            Console.WriteLine($"Does encrypted password = stored password");
+            Console.WriteLine(encryptedPW == encrypt.EncryptDecrypt(password, 200));
+            _context.Users.Add(new User { Username = username, Email = email, Password = encryptedPW });
             _context.SaveChanges();
             return Redirect($"/{username}");
             // Console.WriteLine("still inside the post controller");
