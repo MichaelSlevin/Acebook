@@ -1,9 +1,9 @@
-﻿@model TodoApi.Models.TodoList
+﻿@model TodoApi.Models.Profile
 
-<h1>To do items</h1>
-    @foreach (var item in @Model.GetItems())
+<h1>Posts</h1>
+    @foreach (var post in @Model.GetPosts())
     {
-        @item.Name;
+        @post.Content;
 
         <br />
 
@@ -11,6 +11,6 @@
 
 
 <form method="post" action="/">
-  To do item: <input type="text" name="name" />
+  Post: <input type="text" name="name" />
   <input type="submit" value="submit">
 </form>

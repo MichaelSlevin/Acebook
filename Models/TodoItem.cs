@@ -3,29 +3,31 @@ using System;
 
 namespace TodoApi.Models
 {
-    public class TodoItem
+    //public class TodoItem
+    //{
+    //    public long Id { get; set; }
+    //    public string Name { get; set; }
+    //    public bool IsComplete { get; set; }
+    //}
+
+    public class Profile
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool IsComplete { get; set; }
-    }
+        public string Username;
 
-    public class TodoList
-    {
-        public List<TodoItem> TodoItemArray = new List<TodoItem>();
+        public List<Post> PostArray = new List<Post>();
 
-        public TodoList()
+        public Profile(string username)
         {
-
+            this.Username = username;
         }
-        public List<TodoItem> GetItems() 
+        public List<Post> GetPosts() 
         {
-            return TodoItemArray;
+            return PostArray;
         }
 
-        public void AddItem(TodoItem item)
+        public void AddPost(Post post)
         {
-            TodoItemArray.Add(item);
+            PostArray.Add(post);
         }
 
     }

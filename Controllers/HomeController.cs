@@ -1,48 +1,52 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using TodoApi.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Models;
 
-//namespace TodoApi.Controllers
-//{
+namespace TodoApi.Controllers
+{
 
-//    [Route("")]
-//    [Route("[controller]")]
-//    //[ApiController]
-//    public class HomeController : Controller
-//    {
-//        readonly TodoContext _context;
+    [Route("")]
+    [Route("[controller]")]
+    //[HomeController]
+    public class HomeController : Controller
+    {
+        readonly TodoContext _context;
 
-//        public HomeController(TodoContext context)
-//        {
-//             _context = context;
-//        }
-//        // GET api/values
-//        [HttpGet]
-//        public ActionResult<IEnumerable<string>> Index()
-//        {
-//            var todoitems = _context.TodoItems.ToList();
-//            Console.WriteLine("In the home controller");
-//            TodoList todoList = new TodoList();
+        public HomeController(TodoContext context)
+        {
+             _context = context;
+        }
+        // GET api/values
+        [HttpGet("{username}")]
+        public ActionResult<IEnumerable<string>> Index(string username)
+        {
+            var posts = _context.Posts.ToList();
+            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
+            Console.WriteLine($"userid is {userid}");
+            IEnumerable<Post> UPosts = posts.Where(post => post.UserId == userid);
 
-//            foreach (var item1 in todoitems)
-//            {
-//                todoList.AddItem(new TodoItem { Id = item1.Id, Name = item1.Name, IsComplete = item1.IsComplete
-//                });
+            Console.WriteLine("In the home controller");
+            Profile profile = new Profile(username);
 
-//                Console.WriteLine(item1.Name);
+            foreach (var post in UPosts)
+            {
+                profile.AddPost(new Post { Id = post.Id, UserId = post.UserId, Content = post.Content, CreatedOn = post.CreatedOn
+                });
 
-//            }
-//            Console.WriteLine(_context.GetType());
-//            Console.WriteLine("good morning");
-//            @ViewData["todoItems"] = todoitems;
+                Console.WriteLine(post.Content);
 
-//            return View(todoList);
+            }
+            Console.WriteLine(_context.GetType());
+            Console.WriteLine("good morning");
+            @ViewData["posts"] = posts;
 
-//        }
+            return View(profile);
+
+        }
 //        [HttpPost]
 //        public ActionResult Add(string name)
 //        {
@@ -98,5 +102,5 @@
 //        {
 
 //        }
-//    }
-//}
+    }
+}
