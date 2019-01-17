@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Tests\" />
@@ -19,9 +18,36 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.0" />
     <PackageReference Include="NpgSql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.1" />
     <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="bootstrap" Version="3.3.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Models\TodoList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\site.min.css" />
+    <Content Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Remove="wwwroot\lib\jquery-validation\.bower.json" />
+    <Content Remove="wwwroot\testing.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap.css.map" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+    <None Remove="bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
+    <None Remove="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
+    <None Remove="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Remove="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <None Remove="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
+    <None Remove="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Remove="bootstrap-3.3.7-dist\js\bootstrap.js" />
+    <None Remove="bootstrap-3.3.7-dist\js\bootstrap.min.js" />
+    <None Remove="bootstrap-3.3.7-dist\js\npm.js" />
   </ItemGroup>
 </Project>

@@ -1,16 +1,43 @@
-﻿@model TodoApi.Models.Profile
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Welcome to Acebook</h1>
+
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#">Profile <span class="badge"></span></a></li>
+    <li role="presentation"><a href="#">Posts<span class="badge"></span></a></li>
+</ul>
+
+@model TodoApi.Models.Profile
 
 <h1>Posts</h1>
-    @foreach (var post in @Model.GetPosts())
-    {
-        @post.Content;
+@foreach (var post in @Model.GetPosts())
+{
+    @post.Content;
 
-        <br />
+    <br />
 
-    }
+}
 
 
 <form method="post" action="/">
-  Post: <input type="text" name="name" />
+
+  Post: <input type="text" name="content" />
+    <input type="text" name="username" value=@($"{Model.Username}") hidden="hidden" />
   <input type="submit" value="submit">
+
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
