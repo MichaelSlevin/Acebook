@@ -21,6 +21,8 @@ namespace TodoApi.Controllers
             _context = context;
         }
         // GET api/values
+
+        
         [HttpGet("{username}")]
         public ActionResult<IEnumerable<string>> Index(string username)
         {
@@ -43,8 +45,7 @@ namespace TodoApi.Controllers
                     Content = post.Content,
                     CreatedOn = post.CreatedOn
                 });
-
-
+                 
                 Console.WriteLine(post.Content);
 
             }
@@ -53,9 +54,7 @@ namespace TodoApi.Controllers
             @ViewData["posts"] = posts;
 
             return View(profile);
-
         }
-
         [HttpPost("adding_post")]
         public ActionResult Add(string content, string username)
         {
