@@ -21,6 +21,8 @@ namespace TodoApi.Controllers
             _context = context;
         }
         // GET api/values
+
+        
         [HttpGet("{username}")]
         public ActionResult<IEnumerable<string>> Index(string username)
         {
@@ -43,8 +45,7 @@ namespace TodoApi.Controllers
                     Content = post.Content,
                     CreatedOn = post.CreatedOn
                 });
-
-
+                 
                 Console.WriteLine(post.Content);
 
             }
@@ -53,7 +54,19 @@ namespace TodoApi.Controllers
             @ViewData["posts"] = posts;
 
             return View(profile);
+        }
+        [HttpPost("adding_post")]
+        public ActionResult Add(string content, string username)
+        {
+            Console.WriteLine("The form is triggering the post");
+            Console.WriteLine($"username is {username}");
+            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
+            Console.WriteLine($"userid is {userid}");
 
+            _context.Posts.Add(new Post { UserId = userid, Content = content, CreatedOn = System.DateTime.UtcNow });
+            _context.SaveChanges();
+
+            return Redirect("/" + username);
         }
 
         [Route("register")]
