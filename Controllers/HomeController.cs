@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +35,7 @@ namespace TodoApi.Controllers
 
             foreach (var post in UPosts)
             {
+
                 profile.AddPost(new Post
                 {
                     Id = post.Id,
@@ -42,6 +43,7 @@ namespace TodoApi.Controllers
                     Content = post.Content,
                     CreatedOn = post.CreatedOn
                 });
+
 
                 Console.WriteLine(post.Content);
 
@@ -53,60 +55,31 @@ namespace TodoApi.Controllers
             return View(profile);
 
         }
-        [HttpPost]
-        public ActionResult Add(string content, string username)
+
+        [Route("register")]
+        [HttpGet]
+        public ActionResult Register()
         {
-            Console.WriteLine("The form is triggering the post");
-            Console.WriteLine($"username is {username}");
-            long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
-            Console.WriteLine($"userid is {userid}");
-           
-            _context.Posts.Add(new Post { UserId = userid, Content = content });
-            _context.SaveChanges();
-           
-            return Redirect("/" + username);
+          Console.WriteLine("I made it into the register route!!!!!!!");
+          return View();
         }
-
-        //        //[HttpDelete("{id}")]
-        //        //public ActionResult Delete(long id)
-        //        //{
-        //        //  Console.WriteLine("Delete has been called");
-        //        //  _context.TodoItems.Delete(id);
-        //        //  _context.SaveChanges();
-        //        //  return Redirect("/");
-        //        //}
-
-
-        //        // GET api/values/5
-        //        [HttpGet("{id}")]
-        //        public ActionResult<string> Get(int id)
-        //        {
-        //            Console.WriteLine(id);
-        //            return id.ToString();
-        //        }
-
-        //        // POST api/values
-        //        [HttpPost]
-        //        public void Post()
-
-        //        //public void Post([FromBody] string value)
-        //        {
-        //            Console.WriteLine("Hello");
-        //            //return new string[] { "Test string", "value2" };
-        //        }
-
-        //        // PUT api/values/5
-        //        [HttpPut("{id}")]
-        //        public void Put(int id, [FromBody] string value)
-        //        {
-
-        //        }
-
-        //        // DELETE api/values/5
-        //        [HttpDelete("{id}")]
-        //        public void Delete(int id)
-        //        {
-
-        //        }
+        [HttpPost]
+        public ActionResult Add(string username, string email, string password)
+        {
+            Console.WriteLine($"Username is {username}");
+            Console.WriteLine($"Email is {email}");
+            Console.WriteLine($"Password is {password}");
+            Console.WriteLine("The form is triggering the post");
+            Encrypt encrypt = new Encrypt();
+            string encryptedPW = encrypt.EncryptDecrypt(password, 200);
+            Console.WriteLine($"Encrypted password is {encryptedPW}");
+            Console.WriteLine($"Does encrypted password = stored password");
+            Console.WriteLine(encryptedPW == encrypt.EncryptDecrypt(password, 200));
+            _context.Users.Add(new User { Username = username, Email = email, Password = encryptedPW });
+            _context.SaveChanges();
+            return Redirect($"/{username}");
+            // Console.WriteLine("still inside the post controller");
+        }
+       
     }
 }
