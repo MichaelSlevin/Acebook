@@ -22,6 +22,7 @@ namespace TodoApi.Models
         }
         public List<Post> GetPosts() 
         {
+            PostArray.Reverse();
             return PostArray;
         }
 
