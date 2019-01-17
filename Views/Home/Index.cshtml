@@ -1,14 +1,16 @@
 ﻿@model TodoApi.Models.Profile
 
 <h1>Posts</h1>
+
 @foreach (var post in @Model.GetPosts())
-{
-    <p>@post.CreatedOn
-    &emsp;@post.Content</p>
-    <br />
+    {
+        <p>
+            @post.CreatedOn
+            &emsp;@post.Content
+        </p>
 
-}
-
+    }
+    
 
 <form method="post" action="/">
     Post: <input type="text" name="name" />
