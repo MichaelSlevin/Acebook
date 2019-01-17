@@ -61,7 +61,7 @@ namespace TodoApi.Controllers
             long userid = _context.Users.Where(x => x.Username == username).Select(x => x.Id).First();
             Console.WriteLine($"userid is {userid}");
            
-            _context.Posts.Add(new Post { UserId = userid, Content = content });
+            _context.Posts.Add(new Post { UserId = userid, Content = content, CreatedOn = System.DateTime.UtcNow });
             _context.SaveChanges();
            
             return Redirect("/" + username);
