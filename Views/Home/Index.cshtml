@@ -14,8 +14,8 @@
 <h1>Posts</h1>
 @foreach (var post in @Model.GetPosts())
 {
-    @post.Content;
-
+    <p>@post.CreatedOn
+    &emsp;@post.Content</p>
     <br />
 
 }
